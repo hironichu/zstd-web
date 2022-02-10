@@ -18,7 +18,7 @@ Here is a basic exemple of usage :
 </head>
 <body>
 	<script type="module">
-		import { decompress, compress } from "https://raw.githubusercontent.com/hironichu/zstd-web/main/zstd.js"
+		import { decompress, compress } from "https://deno.land/x/zstd_web@0.2/zstd.js"
 		const before = new Uint8Array(new ArrayBuffer(1024 * 1024 * 10))
 		const data = compress(before)
 		const after = decompress(data)
