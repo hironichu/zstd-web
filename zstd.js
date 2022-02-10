@@ -103,6 +103,20 @@ const getFrameContentSize = (src, size) => {
 	}
   };
 await (async () => {
-	Module['init']('./zstd.wasm');
+	const wasm_url = new URL('zstd.wasm', import.meta.url);
+	let wasmCode = '';
+	switch (wasm_url.protocol) {
+		case 'file:':
+		wasmCode = await Deno.readFile(wasm_url);
+		break
+		case 'https:':
+		case 'http:':
+		wasmCode = await (await fetch(wasm_url)).arrayBuffer();
+		break
+		default:
+		throw new Error(`Unsupported protocol: ${wasm_url.protocol}`);
+		break
+	}
+	Module['init'](wasmCode);
 	await waitInitialized();
 })();

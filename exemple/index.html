@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script type="module">
-		import { decompress, compress } from "./zstd.js"
+		import { decompress, compress } from "https://deno.land/x/zstd_web/zstd.js"
 		const before = new Uint8Array(new ArrayBuffer(1024 * 1024 * 10))
 		const data = compress(before)
 		const after = decompress(data)
